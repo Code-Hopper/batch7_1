@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="vendor/bootstrap-5/css/bootstrap.css">
+</head>
+
+<body>
+
+
+    <div class="container-fluid bg-dark">
+        <div class="container text-light">
+            <h1 class="text-center">Student List Sent By Server</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="">
+            <form class="d-flex flex-column justify-content-center align-items-center" action="/" method="post">
+                <div class="row p-5">
+                    <div class="col"><input required type="text" placeholder="Student Name" name="student_name"
+                            class="form-control"></div>
+                    <div class="col"><input required type="text" placeholder="Student City" name="student_city"
+                            class="form-control"></div>
+                    <div class="col"><input required type="text" placeholder="Student Subject" name="student_subject"
+                            class="form-control"></div>
+                    <div class="col"><input required type="tel" placeholder="Student Contact" name="student_number"
+                            class="form-control"></div>
+                </div>
+                <button class="btn btn-success mb-2" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <table class="table table-dark">
+
+            <tr class="">
+                <th class="bg-warning text-dark">ID</th>
+                <th class="bg-warning text-dark">Name</th>
+                <th class="bg-warning text-dark">City</th>
+                <th class="bg-warning text-dark">Subject</th>
+                <th class="bg-warning text-dark">Contact</th>
+                <th class="bg-warning text-dark">Action</th>
+            </tr>
+
+            <% data.forEach((element , index)=>{ %>
+
+                <tr>
+                    <td>
+                        <%= element.student_id %>
+                    </td>
+                    <td>
+                        <%= element.student_name %>
+                    </td>
+                    <td>
+                        <%= element.student_city %>
+                    </td>
+                    <td>
+                        <%= element.student_subject%>
+                    </td>
+                    <td>
+                        <%= element.student_number %>
+                    </td>
+                    <td>
+                        <form action="/delete" method="post">
+                           <!-- <input type="submit" placeholder="" name="delete_id" value="delete"> -->
+                           <input class="d-none" type="text" placeholder="" name="delete_id" value= <%= element.student_id %> >
+                           <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+
+                <% } ) %>
+
+        </table>
+    </div>
+
+
+
+</body>
+
+</html>

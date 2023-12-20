@@ -46,7 +46,16 @@ let GetReviews = (req, res) => {
 let PostHome = (req, res) => {
     console.log("user has posted something")
     console.log(req.body)
-    student_data.push(req.body)
+
+    let newEnrty = {
+        student_id: student_data.length + 1,
+        student_name: req.body.student_name,
+        student_city: req.body.student_city,
+        student_subject: req.body.student_subject,
+        student_number: req.body.student_number
+    }
+
+    student_data.push(newEnrty)
     res.redirect('/');
 }
 
@@ -54,12 +63,23 @@ let PostHome = (req, res) => {
 
 let deleteEntry = (req, res) => {
     console.log(req.body)
-    
+
     let delete_element = req.body.delete_id;
 
-    student_data = student_data.filter((element)=>{
-        // return !delete_element
+
+    student_data.forEach((element) => {
+
+        if (delete_element == element.student_id) {
+            console.log(element)
+            student_data = student_data.filter((toReturn)=>{
+                return toReturn !== element
+            })
+        }
     })
+
+    // student_data = student_data.filter((element)=>{
+
+    // })
 
     res.redirect("/")
 
